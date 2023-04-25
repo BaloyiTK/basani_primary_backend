@@ -13,30 +13,27 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-// Define an async function for adding a team member
 const addTeamMember = asyncHandler(async (req, res) => {
-
+  let result;
 
   const { name, position, photo } = req.body;
 
-  console.log(photo);
-
   if (!photo) {
-    // if no image file was provided in the request
-    return res.status(400).json({ error: "No image file provided" }); // send an error response to the client
-  }
+    result =
+      "https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg";
+  } else
+    (result = await cloudinary.uploader.upload(photo)),
+      (result = result.secure_url);
 
   if (!name || !position) {
     res.status(400);
-    throw new Error("Please fill in all the required fields")
+    throw new Error("Please fill in all the required fields");
   }
 
-  // Upload the photo to Cloudinary
-  const result = await cloudinary.uploader.upload(photo);
   const member = await Team.create({
     name,
     position,
-    photo: result.secure_url,
+    photo: result,
   });
 
   return res.status(200).json({
