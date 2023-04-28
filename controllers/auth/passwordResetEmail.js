@@ -2,6 +2,9 @@ import nodemailer from "nodemailer";
 
 export const passwordResetEmail = async (token, user, type) => {
   // If no errors occur, send an email to the user
+  const resetDateTime = user.updatedAt;
+
+  console.log(user.updatedAt);
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -21,29 +24,94 @@ export const passwordResetEmail = async (token, user, type) => {
       to: user.email,
       subject: "Password Reset Request",
       html: `
-              <!DOCTYPE html>
-              <html>
-                <head>
-                  <title>Password Reset Request</title>
-                </head>
-                <body>
-                  <p>Dear ${user.username},</p>
-          
-                  <p>We received a request to reset your password for your account with us. To complete this process, please click on the link below to reset your password:</p>
-          
-                  <p><a href="${resetLink}" target="_blank">Reset Password</a></p>
-          
-                  <p>Please note that the link will expire in 1 hour, which is on ${new Date(
-                    currentDate.getTime() + 60 * 60 * 1000
-                  )}. If you do not reset your password within this time, you may need to request a new link.</p>
-          
-                  <p>If you did not request a password reset, please ignore this message and contact us immediately if you suspect any unauthorized access to your account.</p>
-          
-                  <p>Best regards,<br>[Your Company/Website Name]</p>
-                </body>
-              </html>
-            `,
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Password Reset Request</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                line-height: 1.5;
+                color: #333;
+                margin: 0;
+                padding: 0;
+              }
+    
+              .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f5;
+              }
+    
+              h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+              }
+    
+              p {
+                margin-bottom: 20px;
+              }
+    
+              a {
+                color: #fff;
+                background-color: #007bff;
+                border-color: #007bff;
+                display: inline-block;
+                font-weight: 400;
+                text-align: center;
+                vertical-align: middle;
+                cursor: pointer;
+                border: 1px solid transparent;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                border-radius: 0.25rem;
+                text-decoration: none;
+              }
+    
+              a:hover {
+                background-color: #0069d9;
+                border-color: #0062cc;
+              }
+    
+              .footer {
+                margin-top: 20px;
+                text-align: center;
+              }
+    
+              .footer p {
+                margin-bottom: 0;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Password Reset Request</h1>
+    
+              <p>Dear ${user.username},</p>
+    
+              <p>We received a request to reset your password for your account with us. To complete this process, please click on the button below to reset your password:</p>
+    
+              <p><a href="${resetLink}" target="_blank">Reset Password</a></p>
+    
+              <p>Please note that the link will expire in 1 hour, which is on ${new Date(
+                currentDate.getTime() + 60 * 60 * 1000
+              )}. If you do not reset your password within this time, you may need to request a new link.</p>
+    
+              <p>If you did not request a password reset, please ignore this message and contact us immediately if you suspect any unauthorized access to your account.</p>
+    
+              <div class="footer">
+                <p>Best regards,<br>[Your Company/Website Name]</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
     };
+    
 
     await transporter.sendMail(message);
   } else {
@@ -52,20 +120,92 @@ export const passwordResetEmail = async (token, user, type) => {
       to: user.email, // list of receivers
       subject: "Your Password Has Been Successfully Reset", // Subject line
       text: "Please reset your password using the link below", // plain text body
-      html: `<p>Dear ${user.username}, <br/><br/>
-
-    This is a confirmation that your password for [Your Application Name] has been successfully reset. If you did not request a password reset, please contact our support team immediately at [Your Support Email].
+      html: `<!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Password Reset Confirmation for Basani Primary School</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              font-size: 16px;
+              line-height: 1.5;
+              margin: 0;
+              padding: 0;
+            }
+            h1 {
+              font-size: 28px;
+              margin-bottom: 20px;
+              text-align: center;
+            }
+            .container {
+              max-width: 600px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+            .message {
+              background-color: #f2f2f2;
+              border-radius: 5px;
+              padding: 20px;
+            }
+            .message p {
+              margin-bottom: 20px;
+            }
+            .message ul {
+              margin: 0;
+              padding: 0;
+              margin-bottom: 20px;
+            }
+            .message li {
+              list-style-type: none;
+              margin-bottom: 5px;
+            }
+            .message a {
+              color: #007bff;
+              text-decoration: none;
+            }
+            .message a:hover {
+              text-decoration: underline;
+            }
+            .footer {
+              background-color: #007bff;
+              color: #fff;
+              font-size: 14px;
+              padding: 10px;
+              text-align: center;
+              border-radius: 5px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>Password Reset Confirmation</h1>
+              <div class="message">
+                <p>Dear ${user.username},</p>
     
-    Date and Time of Reset: [Insert Date and Time]
+                <p>We would like to confirm that your admin password for Basani Primary School has been successfully reset.</p>
     
-    If you did initiate this password reset, please log in to your account using your new password as soon as possible. We recommend that you change your password again to a unique and secure password that you haven't used before.
+                <p>If you did not initiate this request, please contact our support team immediately at <a href="mailto:${process.env.EMAIL_ADDRESS}">${process.env.EMAIL_ADDRESS}</a>.</p>
     
-    If you have any questions or concerns about this password reset, please don't hesitate to contact our support team. We're here to help.
+                <p>Details of the reset:</p>
+                <ul>
+                  <li>Date and Time: ${resetDateTime}</li>
+                </ul>
     
-    Thank you for choosing [Your Application Name],
+                <p>If you have any questions or concerns regarding this password reset, please do not hesitate to contact our support team. We are always here to help.</p>
     
-    [Your Company Name]</p> `, // html body
+              </div>
+    
+              <div class="footer">
+                <p>Thank you for choosing Basani Primary School.</p>
+                <p>The Basani Primary School Team</p>
+              </div>
+          </div>
+        </body>
+        </html>`, // html body
     };
+    
     await transporter.sendMail(message);
   }
 };

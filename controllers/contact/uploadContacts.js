@@ -7,7 +7,14 @@ const uploadContacts = asyncHandler(async (req, res) => {
   let notAdded = 0;
 
   for (const contact of req.body) {
-    const { number, grade } = contact;
+    // If grades is a string, split it into an array
+    let { number, grades } = contact;
+    let gradesArray = grades;
+
+    if (typeof grades === "string") {
+      gradesArray = grades.split(",");
+      grades = gradesArray;
+    }
 
     // Check if the number already exists in the database
     const existingContact = await Contact.findOne({ number });
@@ -24,7 +31,7 @@ const uploadContacts = asyncHandler(async (req, res) => {
 
     const addedContact = await Contact.create({
       number,
-      grade,
+      grades,
     });
 
     if (addedContact) {
@@ -34,19 +41,11 @@ const uploadContacts = asyncHandler(async (req, res) => {
     }
   }
 
-  if (counter === 0) {
-    res.status(400);
-    throw new Error(`The contact number should be 10 digits and contain only numeric characters`);
-    
-  }
-
-  return res
-    .status(200)
-    .json({ 
-      message: `${counter} contacts added successfully`,
-      total: total,
-      notAdded: notAdded
-    });
+  return res.status(200).json({
+    message: `${counter} contacts added successfully`,
+    total: total,
+    notAdded: notAdded,
+  });
 });
 
 export default uploadContacts;

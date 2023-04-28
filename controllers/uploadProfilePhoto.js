@@ -2,7 +2,6 @@ import cloudinary from "cloudinary";
 import User from "../models/userModel.js"
 import dotenv from "dotenv";
 
-// Load environment variables from .env file
 dotenv.config();
 
 // Configure the Cloudinary SDK with your account details

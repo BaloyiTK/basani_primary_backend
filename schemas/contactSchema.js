@@ -7,8 +7,8 @@ const contactSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    grade: {
-      type: String, // Defines an array of strings
+    grades: {
+      type: [String], // Defines an array of strings
       required: true,
     },
   },

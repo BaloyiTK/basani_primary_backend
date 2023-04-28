@@ -5,7 +5,6 @@ import Program from "../../models/programModel.js";
 const getPrograms = asyncHandler(async (req,res) => {
   //const members = await Team.find({ position: { $not: { $regex: /principal/i } } });
   const programs = await Program.find();
-  console.log(programs)
 
   if (!programs || programs.length === 0) {
     res.status(404);

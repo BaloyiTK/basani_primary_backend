@@ -1,9 +1,7 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import User from "../../models/userModel.js";
-import { sendEmail } from "../../utils/sendEmail.js";
 import { passwordResetEmail } from "./passwordResetEmail.js";
-
 
 const resetPassword = asyncHandler(async (req, res) => {
   const token = req.query.token; // Extract the token from the request query parameter
@@ -44,4 +42,3 @@ const resetPassword = asyncHandler(async (req, res) => {
 });
 
 export default resetPassword;
-
