@@ -1,8 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../../models/userModel.js";
-
 import { generateToken } from "../../generateToken.js";
-import { sendEmail } from "../../utils/sendEmail.js";
+import { passwordResetEmail } from "./passwordResetEmail.js";
 
 // Define an async function for handling forgot password requests
 const forgotPassword = asyncHandler(async (req, res) => {
@@ -24,7 +23,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   // Set the type of the email to "forgot" and send the password reset email to the user
   const type = "forgot";
-  sendEmail(token, user, type);
+  passwordResetEmail(token, user, type);
 
   // Return a success response with a message indicating that the password reset link has been sent
   return res.status(200).json({

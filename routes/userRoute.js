@@ -12,7 +12,8 @@ import uploadProfilePhoto from "../controllers/uploadProfilePhoto.js";
 import protect from "../middlewares/authMiddleware.js";
 import multer from "multer";
 import fs from "fs";
-
+import getUsers from "../controllers/getUsers.js";
+import addUser from "../controllers/addUser.js";
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -29,8 +30,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Create the uploads directory if it does not exist
-if (!fs.existsSync('./uploads')){
-  fs.mkdirSync('./uploads');
+if (!fs.existsSync("./uploads")) {
+  fs.mkdirSync("./uploads");
 }
 
 const router = express.Router();
@@ -39,11 +40,13 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/user", protect, getUser);
+router.get("/users", getUsers);
+router.post("/users", addUser);
 router.get("/loggedin", loginStatus);
 router.patch("/updateuser", protect, updateUser);
 router.patch("/changepassword", protect, changePassword);
 router.post("/forgotpassword", forgotPassword);
-router.post("/resetpassword", resetPassword)
-router.post("/upload", upload.single("image"),protect, uploadProfilePhoto);
+router.post("/resetpassword", resetPassword);
+router.post("/upload", upload.single("image"), protect, uploadProfilePhoto);
 
 export default router;

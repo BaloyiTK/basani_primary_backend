@@ -1,15 +1,14 @@
 import express from "express";
 import multer from "multer";
 import fs from "fs";
-import addGallery from "../controllers/gallery/addGalllery.js";
-import getGallery from "../controllers/gallery/getGallery.js";
-import deleteGallety from "../controllers/gallery/deleteGallety.js";
+import addProgram from "../controllers/program/addProgram.js";
+import deleteProgram from "../controllers/program/deleteProgram.js";
+import getPrograms from "../controllers/program/getPrograms.js";
+
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
-  //destination: (req, file, cb) => {
-  // cb(null, "uploads/");
-  //},
+ 
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + "-" + file.originalname);
@@ -26,9 +25,8 @@ if (!fs.existsSync("./uploads")) {
 
 const router = express.Router();
 
-router.post("/gallery", upload.single("image"), addGallery);
-router.get("/gallery", getGallery);
-router.delete("/gallery/:id", deleteGallety);
-// router.delete("/gallery/:id", deleteTeamMembers);
+router.post("/program", upload.single("image"), addProgram);
+router.get("/program", getPrograms);
+router.delete("/program/:id", deleteProgram);
 
 export default router;

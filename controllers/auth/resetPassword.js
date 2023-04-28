@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import User from "../../models/userModel.js";
 import { sendEmail } from "../../utils/sendEmail.js";
+import { passwordResetEmail } from "./passwordResetEmail.js";
 
 
 const resetPassword = asyncHandler(async (req, res) => {
@@ -37,7 +38,7 @@ const resetPassword = asyncHandler(async (req, res) => {
   user.password = password; // Set the new password
   await user.save(); // Save the user
 
-  sendEmail(undefined, user, undefined); // Send a password reset email
+  passwordResetEmail(undefined, user, undefined); // Send a password reset email
 
   return res.status(200).json({ message: "Password reset successful" }); // Return a success response
 });
