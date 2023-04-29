@@ -8,8 +8,6 @@ const sendSMS = asyncHandler(async (req, res) => {
 
   const contacts = await Contact.find();
 
-  console.log(selectedGrades)
-
   if (!contacts || contacts.length === 0) {
     return res.status(404).json({
       message:
@@ -26,7 +24,8 @@ const sendSMS = asyncHandler(async (req, res) => {
   try {
     await Promise.all(
       filteredContacts.map((contact) =>
-        axios.post(
+
+      axios.post(
           "https://rest.smsportal.com/v1/BulkMessages",
           {
             messages: [

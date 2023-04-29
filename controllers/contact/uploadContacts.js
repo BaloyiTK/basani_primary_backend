@@ -7,12 +7,13 @@ const uploadContacts = asyncHandler(async (req, res) => {
   let notAdded = 0;
 
   for (const contact of req.body) {
-    // If grades is a string, split it into an array
+  
     let { number, grades } = contact;
+    grades = grades.toString();
     let gradesArray = grades;
 
     if (typeof grades === "string") {
-      gradesArray = grades.split(",");
+      gradesArray = grades.split(/[,\.]/);
       grades = gradesArray;
     }
 

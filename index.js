@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
-import uniformRouter from "./routes/uniformRoute.js"
-import usersRouter from "./routes/userRoute.js"
+import uniformRouter from "./routes/uniformRoute.js";
+import usersRouter from "./routes/userRoute.js";
 import eventRouter from "./routes/eventRouter.js";
 import teamRouter from "./routes/teamRoute.js";
-import announcementRouter from "./routes/announcemenRoute.js"
+import announcementRouter from "./routes/announcemenRoute.js";
 import smsRouter from "./routes/smsRoute.js";
 import galleryRouter from "./routes/galleryRoute.js";
 import contactRouter from "./routes/contactRoute.js";
@@ -45,18 +45,14 @@ app.use("/api", eventRouter);
 app.use("/api", smsRouter);
 app.use("/api", contactRouter);
 app.use("/api", teamRouter);
-app.use("/api", galleryRouter)
+app.use("/api", galleryRouter);
 app.use("/api", emailRouter);
 app.use("/api", uniformRouter);
 app.use("/api", announcementRouter);
 app.use("/api", programRouter);
 
-
-
-
-const uri = process.env.DATABASE_URI 
-const PORT = process.env.PORT
-
+const uri = process.env.DATABASE_URI;
+const PORT = process.env.PORT;
 
 app.use(erroHanndler);
 
@@ -64,10 +60,10 @@ mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(PORT, () => {
-      console.log("database connected successful")
+      console.log("database connected successful");
       console.log(`server running on port ${PORT}`);
     });
   })
   .catch((err) => {
-    console.error("Error connecting to database:", err.message)
+    console.error("Error connecting to database:", err.message);
   });

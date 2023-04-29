@@ -12,7 +12,7 @@ const addContact = asyncHandler(async (req, res) => {
   }
 
   // Check if the number already exists in the database
-  const existingContact = await Contact.findOne({ number });
+  const existingContact = await Contact.findOne({ number })
 
   if (existingContact) {
     res.status(400);
