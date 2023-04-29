@@ -24,7 +24,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: "https://main--dancing-crumble-3403fe.netlify.app",
+    origin: "http://localhost:3000",
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
   })
