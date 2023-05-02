@@ -5,7 +5,6 @@ import getUser from "../controllers/getUser.js";
 import login from "../controllers/auth/login.js";
 import loginStatus from "../controllers/auth/loginStatus.js";
 import logout from "../controllers/auth/logout.js";
-import register from "../controllers/auth/register.js";
 import resetPassword from "../controllers/auth/resetPassword.js";
 import updateUser from "../controllers/updateUser.js";
 import uploadProfilePhoto from "../controllers/uploadProfilePhoto.js";
@@ -36,12 +35,11 @@ if (!fs.existsSync("./uploads")) {
 
 const router = express.Router();
 
-router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/user", protect, getUser);
-router.get("/users", getUsers);
-router.post("/users", addUser);
+router.get("/users",protect, getUsers);
+router.post("/users",protect, addUser);
 router.get("/loggedin", loginStatus);
 router.patch("/updateuser", protect, updateUser);
 router.patch("/changepassword", protect, changePassword);

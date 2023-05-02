@@ -8,9 +8,16 @@ const deleteGallety = asyncHandler(async (req, res) => {
 
   const imageId = req.params.id;
 
-  await Gallery.findByIdAndDelete(imageId);
+  const deletedImage =  await Gallery.findByIdAndDelete(imageId);
 
-  return res.status(200).json({ message: "Deleted" });
+  if (!deletedImage) {
+
+    res.status(404);
+    throw new Error("Image not found!");
+
+  }
+
+  return res.status(200).json({ message: "Image deleted successfully" });
 });
 
 export default deleteGallety;

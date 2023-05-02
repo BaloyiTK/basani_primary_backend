@@ -4,6 +4,7 @@ import fs from "fs";
 import addProgram from "../controllers/program/addProgram.js";
 import deleteProgram from "../controllers/program/deleteProgram.js";
 import getPrograms from "../controllers/program/getPrograms.js";
+import protect from "../middlewares/authMiddleware.js";
 
 
 // Set up Multer storage engine
@@ -25,8 +26,8 @@ if (!fs.existsSync("./uploads")) {
 
 const router = express.Router();
 
-router.post("/program", upload.single("image"), addProgram);
+router.post("/program", upload.single("image"),protect, addProgram);
 router.get("/program", getPrograms);
-router.delete("/program/:id", deleteProgram);
+router.delete("/program/:id",protect, deleteProgram);
 
 export default router;

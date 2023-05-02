@@ -29,7 +29,8 @@ const login = asyncHandler(async (req, res) => {
   const token = generateToken(user._id);
 
   // set a cookie containing the token
-  const tokenExpires = new Date(Date.now() + 1000 * 60 * 5);
+  const tokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 6);
+
   res.cookie("token", token, {
     httpOnly: true,
     secure: true,

@@ -4,6 +4,14 @@ import Contact from "../../models/contactModel.js";
 const addContact = asyncHandler(async (req, res) => {
   const { number, grades } = req.body;
 
+  if (!number || !grades) {
+    res.status(400);
+    throw new Error(
+      "Fill all the reqired fields"
+    );
+  }
+    
+
   if (!/^\d{10}$/.test(number)) {
     res.status(400);
     throw new Error(

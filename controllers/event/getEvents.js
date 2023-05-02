@@ -10,7 +10,7 @@ const getEvents = asyncHandler(async (req, res) => {
 
   if (!events) {
     res.status(400);
-    throw new Error("no evens found");
+    throw new Error("Event not found");
   }
 
 

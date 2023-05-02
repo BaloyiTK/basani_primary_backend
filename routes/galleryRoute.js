@@ -4,6 +4,7 @@ import fs from "fs";
 import addGallery from "../controllers/gallery/addGalllery.js";
 import getGallery from "../controllers/gallery/getGallery.js";
 import deleteGallety from "../controllers/gallery/deleteGallety.js";
+import protect from "../middlewares/authMiddleware.js";
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -26,9 +27,9 @@ if (!fs.existsSync("./uploads")) {
 
 const router = express.Router();
 
-router.post("/gallery", upload.single("image"), addGallery);
+router.post("/gallery", upload.single("image"), protect, addGallery);
 router.get("/gallery", getGallery);
-router.delete("/gallery/:id", deleteGallety);
+router.delete("/gallery/:id", protect, deleteGallety);
 // router.delete("/gallery/:id", deleteTeamMembers);
 
 export default router;

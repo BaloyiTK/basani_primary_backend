@@ -3,17 +3,19 @@ import Announcement from "../../models/announcementModel.js";
 
 // Define an async function for getting user details
 const getAnnouncement = asyncHandler(async (req, res) => {
-  console.log("annnnn")
   const announcements = await Announcement.find().sort({ date: 1 });
 
-  if (!announcements) {
-    res.status(400);
-    throw new Error("no evens found");
+  if (!announcements || announcements.length === 0) {
+    res.status(404);
+    throw new Error("Announcements not found!");
   }
 
   return res
     .status(200)
-    .json({ message: "Event succsessfuly retried", announcements: announcements });
+    .json({
+      message: "Announcements successfully retrieved",
+      announcements: announcements,
+    });
 });
 
 export default getAnnouncement;

@@ -6,9 +6,9 @@ import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/contact/upload", uploadContacts);
-router.post("/contact/add", addContact);
-router.get("/contact", getContact);
+router.post("/contact/upload",protect, uploadContacts);
+router.post("/contact/add",protect, addContact);
+router.get("/contact",protect, getContact);
 
 
 export default router;

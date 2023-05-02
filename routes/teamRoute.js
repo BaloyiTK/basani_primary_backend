@@ -5,6 +5,7 @@ import getTeamMembers from "../controllers/team/getTeamMembers.js";
 import multer from "multer";
 import fs from "fs";
 import getPrincipal from "../controllers/team/getPrincipal.js";
+import protect from "../middlewares/authMiddleware.js";
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -27,9 +28,9 @@ if (!fs.existsSync("./uploads")) {
 
 const router = express.Router();
 
-router.post("/team", upload.single("image"), addTeamMember);
+router.post("/team", upload.single("image"),protect, addTeamMember);
 router.get("/team", getTeamMembers);
 router.get("/team/principal", getPrincipal);
-router.delete("/team/:id", deleteTeamMembers);
+router.delete("/team/:id",protect, deleteTeamMembers);
 
 export default router;

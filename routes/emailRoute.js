@@ -1,14 +1,14 @@
 import express from "express";
-import getContact from "../controllers/contact/getContact.js";
 import sendEmil from "../controllers/sendEmil .js";
+import protect from "../middlewares/authMiddleware.js";
 
 
 
 const router = express.Router();
 
-router.post("/email", sendEmil);
+router.post("/email",protect, sendEmil);
 
-router.get("/contact", getContact);
+
 
 
 export default router;

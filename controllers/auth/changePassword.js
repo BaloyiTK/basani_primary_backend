@@ -6,10 +6,10 @@ import bcrypt from "bcrypt";
 const changePassword = asyncHandler(async (req, res) => {
   
   // Extract the user ID from the request object
-  const userId = req.user_id;
+  const {user_id} = req;
 
   // Find the user with the specified ID in the database
-  const user = await User.findById(userId);
+  const user = await User.findById(user_id);
 
   if (user) {
     // Extract the old password, new password, and confirm password from the request body
