@@ -8,7 +8,7 @@ export const sendEmail = async (name, email, messages) => {
     secure: false, // true for 465, false for other ports
     auth: {
       user: process.env.EMAIL_ADDRESS, // your email address
-      pass: '@#Tiyani1234' // your email password
+      pass: process.env.EMAIL_PASS, // your email password
     },
   });
 
