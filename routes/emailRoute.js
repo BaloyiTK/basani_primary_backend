@@ -6,7 +6,7 @@ import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/email",protect, sendEmil);
+router.post("/email", sendEmil);
 
 
 
