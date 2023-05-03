@@ -11,7 +11,9 @@ cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET,
+
 });
+
 
 const addTeamMember = asyncHandler(async (req, res) => {
   let result;
@@ -24,6 +26,7 @@ const addTeamMember = asyncHandler(async (req, res) => {
   } else
     (result = await cloudinary.uploader.upload(photo)),
       (result = result.secure_url);
+    
 
   if (!name || !position) {
     res.status(400);
