@@ -13,7 +13,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
 
   await Event.findByIdAndDelete(eventId);
 
-  return res.status(200).json({ message: `Event with ID ${eventId} deleted` });
+  return res.status(200).json({ message: `Event deleted successfully` });
 });
 
 export default deleteEvent;

@@ -3,20 +3,13 @@ import axios from "axios";
 import { Buffer } from 'buffer';
 
 const AccountBalance = asyncHandler(async (req, res) => {
-
-    console.log("balance")
   try {
-    // Define your API credentials
-    const apiKey = 'f13d2b22-f30c-4776-be20-df370a4742c0';
-    const apiSecret = 'u0wERZu5lBXL2Adh/rzRHMGyoQ0RZtmq';
-
-   // https://api.smsportal.com/api5/http5.aspx?Type=credits&prosperk59=xxx&@#Tiyani123=yyy
-
- //  http://api.smsportal.com/api5/http5.aspx?Type=credits&username=prosperk59&password=@#Tiyani123
+    const apiKey = '30adaa49-4e45-440a-ac08-df04e951416a';
+    const apiSecret = 'ilpQ+PCN6qX/hAXCaE4+SPZHjIr/gg1P';
 
     // Define the API endpoint for retrieving account info
-    const apiUrl = 'https://api.smsportal.com/v1/Accounts/AccountInfo';
-
+    const apiUrl = 'https://rest.smsportal.com/v2/balance';
+    
     // Encode the API key and secret in Base64 format
     const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
 

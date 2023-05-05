@@ -13,6 +13,7 @@ import multer from "multer";
 import fs from "fs";
 import getUsers from "../controllers/getUsers.js";
 import addUser from "../controllers/addUser.js";
+import deleteUser from "../controllers/deleteUser.js";
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -39,6 +40,7 @@ router.post("/login", login);
 router.get("/logout", logout);
 router.get("/user", protect, getUser);
 router.get("/users",protect, getUsers);
+router.delete("/users/:id",protect, deleteUser);
 router.post("/users",protect, addUser);
 router.get("/loggedin", loginStatus);
 router.patch("/updateuser", protect, updateUser);

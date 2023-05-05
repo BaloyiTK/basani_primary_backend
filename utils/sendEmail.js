@@ -15,7 +15,7 @@ export const sendEmail = async (name, email, messages) => {
  // pass: process.env.EMAIL_PASS, // your email password
 
   const message = {
-    from: "tiyani@gmail.com",
+    from: email,
     to: process.env.EMAIL_ADDRESS,
     subject: "Email From School Website",
     html: `

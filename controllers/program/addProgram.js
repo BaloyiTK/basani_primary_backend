@@ -37,7 +37,7 @@ const addProgram = asyncHandler(async (req, res) => {
   });
 
   return res.status(200).json({
-    message: "Program member added successfully",
+    message: "Program added successfully",
     program,
   });
 });
