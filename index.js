@@ -7,6 +7,7 @@ import uniformRouter from "./routes/uniformRoute.js";
 import usersRouter from "./routes/userRoute.js";
 import eventRouter from "./routes/eventRouter.js";
 import teamRouter from "./routes/teamRoute.js";
+import statsRouter from "./routes/statisticRoute.js";
 import announcementRouter from "./routes/announcemenRoute.js";
 import smsRouter from "./routes/smsRoute.js";
 import galleryRouter from "./routes/galleryRoute.js";
@@ -50,6 +51,7 @@ app.use("/api", emailRouter);
 app.use("/api", uniformRouter);
 app.use("/api", announcementRouter);
 app.use("/api", programRouter);
+app.use("/api", statsRouter);
 
 const uri = process.env.DATABASE_URI;
 const PORT = process.env.PORT;
