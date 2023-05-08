@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/contact/upload",protect, uploadContacts);
 router.post("/contact/add",protect, addContact);
-router.get("/contact",protect, getContact);
+router.get("/contact", getContact);
 
 
 export default router;
