@@ -6,6 +6,7 @@ import multer from "multer";
 import fs from "fs";
 import getPrincipal from "../controllers/team/getPrincipal.js";
 import protect from "../middlewares/authMiddleware.js";
+import updateTeamMember from "../controllers/team/updateTeamMember.js";
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -33,5 +34,6 @@ router.post("/team", upload.single("image"),protect, addTeamMember);
 router.get("/team", getTeamMembers);
 router.get("/team/principal", getPrincipal);
 router.delete("/team/:id",protect, deleteTeamMembers);
+router.patch("/team/:id",protect, updateTeamMember);
 
 export default router;
