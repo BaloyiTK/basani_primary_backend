@@ -4,18 +4,22 @@ import { generateToken } from "../../generateToken.js";
 import { passwordResetEmail } from "./passwordResetEmail.js";
 
 // Define an async function for handling forgot password requests
-const forgotPassword = asyncHandler(async (req, res) => {
-  
-  // Extract the email from the request body
+const forgotPassword = async (req, res) => {
+
+  try {
+
+    
   const { email } = req.body;
 
-  // Find the user with the specified email in the database
+
+
   const user = await User.findOne({ email });
 
-  // If the user is not found, throw an error and set the response status to 401 (Unauthorized)
+  console.log(user)
+
   if (!user) {
     res.status(401);
-    throw new Error("User not found. Please sign up!");
+    throw new Error("User not found. Please check your email or contact supprt!");
   }
 
   // Generate a token for resetting the password
@@ -29,7 +33,15 @@ const forgotPassword = asyncHandler(async (req, res) => {
   return res.status(200).json({
     message: "Password reset link has been sent to your email. Please check your inbox and follow the instructions to reset your password within an hour.",
   });
-});
+    
+  } catch (error) {
+
+    return res.status(500).json({message: error.message})
+    
+  }
+  
+ 
+};
 
 // Export the forgotPassword function for use in other files
 export default forgotPassword;
