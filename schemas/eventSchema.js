@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const eventSchema = mongoose.Schema(
   {
     title: {
@@ -9,8 +8,7 @@ const eventSchema = mongoose.Schema(
     },
     date: {
       type: String,
-      required:true,
-  
+      required: true,
     },
     location: {
       type: String,
@@ -20,8 +18,16 @@ const eventSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    expireDate: {
+      type: String,
+      required: false,
+      default: function() {
+        return this.date; // Set the default value to the value of the `date` field
+      },
+    },
   },
   { timestamps: true }
 );
 
 export default eventSchema;
+
