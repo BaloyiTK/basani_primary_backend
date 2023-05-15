@@ -10,7 +10,9 @@ import teamRouter from "./routes/teamRoute.js";
 import statsRouter from "./routes/statisticRoute.js";
 import announcementRouter from "./routes/announcemenRoute.js";
 import smsRouter from "./routes/smsRoute.js";
+import historyRouter from "./routes/historyRoute.js";
 import galleryRouter from "./routes/galleryRoute.js";
+import admissionRouter from "./routes/admissionRoute.js";
 import contactRouter from "./routes/contactRoute.js";
 import emailRouter from "./routes/emailRoute.js";
 import programRouter from "./routes/programRoute.js";
@@ -26,7 +28,7 @@ app.use(
   cors({
     credentials: true,
     origin: "https://www.basaniprimary.co.za",
-    //   origin: "http://localhost:3000",
+    //  origin: "http://localhost:3000",
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
   })
@@ -52,6 +54,8 @@ app.use("/api", uniformRouter);
 app.use("/api", announcementRouter);
 app.use("/api", programRouter);
 app.use("/api", statsRouter);
+app.use("/api", historyRouter);
+app.use("/api", admissionRouter);
 
 const uri = process.env.DATABASE_URI;
 const PORT = process.env.PORT;
