@@ -28,7 +28,7 @@ app.use(
   cors({
     credentials: true,
     origin: "https://www.basaniprimary.co.za",
-    //  origin: "http://localhost:3000",
+    //origin: "http://localhost:3000",
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
   })
