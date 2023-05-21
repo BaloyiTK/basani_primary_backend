@@ -7,7 +7,7 @@ const getAnnouncement = asyncHandler(async (req, res) => {
 
   if (!announcements || announcements.length === 0) {
     res.status(404);
-    throw new Error("Announcements not found!");
+    throw new Error("Announcements not found, please add!");
   }
 
   return res

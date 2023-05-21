@@ -27,7 +27,7 @@ app.use(
   cors({
     credentials: true,
     origin: "https://www.basaniprimary.co.za",
-    //origin: "http://localhost:3000",
+    origin: "http://localhost:3000",
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
   })
@@ -36,7 +36,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
-app.use(erroHanndler);
+
 
 //Routes
 app.use("/api", userRouter);
@@ -56,6 +56,8 @@ app.use("/api", admissionRouter);
 const uri = process.env.DATABASE_URI;
 const PORT = process.env.PORT;
 
+
+
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -67,3 +69,5 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to database:", err.message);
   });
+
+  app.use(erroHanndler);

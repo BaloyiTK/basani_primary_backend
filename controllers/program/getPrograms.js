@@ -8,7 +8,7 @@ const getPrograms = asyncHandler(async (req,res) => {
 
   if (!programs || programs.length === 0) {
     res.status(404);
-    throw new Error("Programs not found!");
+    throw new Error("Programs not found, please add!.");
   }
 
   return res.status(200).json({programs})

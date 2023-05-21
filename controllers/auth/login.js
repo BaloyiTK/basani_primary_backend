@@ -19,7 +19,7 @@ const login = asyncHandler(async (req, res) => {
   // if the user doesn't exist, return a 400 status code with an error message
   if (!user) {
     res.status(400);
-    throw new Error("User not found , please contact supprt!");
+    throw new Error("User not found , please contact support!");
   }
 
   // check if the provided password matches the stored password using bcrypt.compare method
