@@ -14,9 +14,11 @@ cloudinary.config({
 });
 
 const addProgram = asyncHandler(async (req, res) => {
+
   let result;
 
   const { title, description, photo } = req.body;
+  console.log(photo)
 
   if (!photo) {
     res.status(400);

@@ -7,8 +7,9 @@ const deleteProgram = asyncHandler(async (req, res) => {
   const programId = req.params.id;
 
   await Program.findByIdAndDelete(programId);
+  
+  return res.status(200).json({ message: "Program deleted Successfully" });
 
-  return res.status(200).json({ message: "Deleted" });
 });
 
 export default deleteProgram;

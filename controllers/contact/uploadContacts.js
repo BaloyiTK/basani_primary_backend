@@ -17,8 +17,8 @@ const uploadContacts = asyncHandler(async (req, res) => {
     // Check if the number already exists in the database
     const existingContact = await Contact.findOne({ number });
 
-    if (number.length !== 10 || existingContact) {
-      continue; // Skip this contact if it doesn't have 10 digits or already exist
+    if (number.length !== 10 || existingContact || grades == "") {
+      continue; // Skip this contact if it doesn't have 10 digits or already exist or grades not entered
     }
 
     const addedContact = await Contact.create({

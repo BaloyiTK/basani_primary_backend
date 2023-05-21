@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import uniformRouter from "./routes/uniformRoute.js";
-import usersRouter from "./routes/userRoute.js";
 import eventRouter from "./routes/eventRouter.js";
 import teamRouter from "./routes/teamRoute.js";
 import statsRouter from "./routes/statisticRoute.js";
@@ -35,15 +34,12 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(express.json({ limit: "100mb" }));
-app.use(express.urlencoded({ limit: "100mb", extended: true }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(erroHanndler);
 
 //Routes
-app.get("/", (req, res) => {
-  res.send("home page");
-});
 app.use("/api", userRouter);
-app.use("/api", usersRouter);
 app.use("/api", eventRouter);
 app.use("/api", smsRouter);
 app.use("/api", contactRouter);
@@ -59,8 +55,6 @@ app.use("/api", admissionRouter);
 
 const uri = process.env.DATABASE_URI;
 const PORT = process.env.PORT;
-
-app.use(erroHanndler);
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
