@@ -8,9 +8,9 @@ const getEvents = asyncHandler(async (req, res) => {
  
   const events = await Event.find().sort({ date: 1 });
 
-  if (!events) {
-    res.status(400);
-    throw new Error("Event not found");
+  if (!events  || events.length === 0) {
+    res.status(404);
+    throw new Error("Events not found, please add!");
   }
 
 
