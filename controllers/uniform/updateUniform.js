@@ -25,14 +25,11 @@ const updateUniform = asyncHandler(async (req, res) => {
 
   const uniformId = req.params.id;
   const uniform = await Uniform.findById(uniformId);
-  let result = ""
-  
-if (photo) {
+  let result = "";
 
-  result = await cloudinary.uploader.upload(photo);
-  
-}
-
+  if (photo) {
+    result = await cloudinary.uploader.upload(photo);
+  }
 
   uniform.name = name || uniform.name;
   uniform.price = price || uniform.price;
