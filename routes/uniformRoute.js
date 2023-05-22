@@ -5,6 +5,7 @@ import addUniform from "../controllers/uniform/addUniform.js";
 import getUniform from "../controllers/uniform/getUniform.js";
 import deleteUniform from "../controllers/uniform/deleteUniform.js";
 import protect from "../middlewares/authMiddleware.js";
+import updateUniform from "../controllers/uniform/updateUniform.js";
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -30,5 +31,6 @@ const router = express.Router();
 router.post("/uniform", upload.single("image"),protect, addUniform);
 router.get("/uniform", getUniform);
 router.delete("/uniform/:id",protect, deleteUniform);
+router.patch("/uniform/:id",protect, updateUniform);
 
 export default router;
